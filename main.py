@@ -4,6 +4,43 @@ from computer import desktop
 import sys
 
 
+def dIdCheck(computerID):
+    bool = False
+    y = 0
+    x = 0
+    z = 0
+    if(computerID.startswith("L")) and len(computerID) == 4:
+        z = 1
+
+    for x in laptops:
+        if (computerID == desktops[y].computerID):
+            x = 1
+        else:
+            x = 0
+        y = y + 1
+    if(x == 1 and z == 1):
+        bool = True
+        return bool
+
+
+def lIdCheck(computerID):
+    bool = False
+    y = 0
+    x = 0
+    z = 0
+    if(computerID.startswith("L")) and len(computerID) == 4:
+        z = 1
+
+    for x in laptops:
+        if (computerID == laptops[y].computerID):
+            x = 1
+        else:
+            x = 0
+    if(x == 1 and z == 1):
+        bool = True
+        return bool
+
+
 laptop0 = laptop("L001", 16, 512, 3.2, 0.99)
 laptop1 = obj = laptop("L002", 16, 1000, 3.2, 0.99)
 desktop0 = obj = desktop("D001", 32, 1000, 4.2, "1080p")
@@ -58,10 +95,13 @@ while True:
             print("Please enter Computer ID")
             tempCID = input()
             tempCID.upper()
-            if (tempCID.startswith('D')):
+            bool = dIdCheck(tempCID)
+            if (bool):
                 break
             else:
                 print("Desktop Computer ID must start with 'D'")
+                print("")
+                print("Computer ID must have 3 digits behind it.")
 
         print("Please enter Memory")
         tempMe = input()
@@ -79,10 +119,13 @@ while True:
             print("Please enter Computer ID")
             tempCID = input()
             tempCID.upper()
-            if (tempCID.startswith('L')):
+            bool = lIdCheck(tempCID)
+            if (bool):
                 break
             else:
-                print("Laptop Computer ID must start with 'L'")
+                print("Desktop Computer ID must start with 'L'")
+                print("")
+                print("Computer ID must have 3 digits behind it.")
         print("Please enter Memory")
         tempMe = input()
         print("Please enter Storage")
