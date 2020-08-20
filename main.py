@@ -135,7 +135,7 @@ while True:
         print("Please enter Weight")
         tempW = input()
         temp = obj = laptop(tempCID, tempMe, tempS, tempCS, tempW)
-        desktops.append(temp)
+        laptops.append(temp)
         print("Sale added")
 
     if (userInput == '4'):
