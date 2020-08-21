@@ -1,8 +1,20 @@
 from computer import computer
 from computer import laptop
 from computer import desktop
-import sys
+import tkinter
+top = tkinter.Tk()
 
+def buttonTest():
+    print("works")
+a = tkinter.Button(top, text = "View all sales", command = buttonTest, padx = 10, pady = 5)
+a.pack()
+b = tkinter.Button(top, text = "Add Desktop Sale", command = buttonTest, padx = 10, pady = 5)
+b.pack()
+c = tkinter.Button(top, text = "Add Laptop Sale", command = buttonTest, padx = 10, pady = 5)
+c.pack()
+d = tkinter.Button(top, text = "Quit", command = buttonTest, padx = 10, pady = 5)
+d.pack()
+top.mainloop()
 
 def dIdCheck(computerID):
     bool = False
@@ -12,11 +24,11 @@ def dIdCheck(computerID):
     if(computerID.startswith("L")) and len(computerID) == 4:
         z = 1
 
-    for x in laptops:
+    for x in desktops:
         if (computerID == desktops[y].computerID):
-            x = 1
-        else:
             x = 0
+        else:
+            x = 1
         y = y + 1
     if(x == 1 and z == 1):
         bool = True
@@ -30,12 +42,13 @@ def lIdCheck(computerID):
     z = 0
     if(computerID.startswith("L")) and len(computerID) == 4:
         z = 1
+        
 
     for x in laptops:
         if (computerID == laptops[y].computerID):
-            x = 1
-        else:
             x = 0
+        else:
+            x = 1
     if(x == 1 and z == 1):
         bool = True
         return bool
