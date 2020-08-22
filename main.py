@@ -1,19 +1,79 @@
 from computer import computer
 from computer import laptop
 from computer import desktop
-import tkinter
-top = tkinter.Tk()
+from tkinter import *
+from tkinter.ttk import *
 
+laptop0 = laptop("L001", 16, 512, 3.2, 0.99)
+laptop1 = obj = laptop("L002", 16, 1000, 3.2, 0.99)
+desktop0 = obj = desktop("D001", 32, 1000, 4.2, "1080p")
+desktop1 = obj = desktop("D002", 32, 2000, 4.0, "4k")
+
+laptops = [laptop0, laptop1]
+desktops = [desktop0, desktop1]
+top = Tk()
+top.geometry("200x200")
 def buttonTest():
     print("works")
-a = tkinter.Button(top, text = "View all sales", command = buttonTest, padx = 10, pady = 5)
-a.pack()
-b = tkinter.Button(top, text = "Add Desktop Sale", command = buttonTest, padx = 10, pady = 5)
-b.pack()
-c = tkinter.Button(top, text = "Add Laptop Sale", command = buttonTest, padx = 10, pady = 5)
-c.pack()
-d = tkinter.Button(top, text = "Quit", command = buttonTest, padx = 10, pady = 5)
-d.pack()
+def showsales():
+    window = Toplevel(top)
+    window.title("show sales")
+    window.geometry("200x200")
+    Label(window, text = "show sales").pack()
+    y = 0
+    for x in laptops:
+        Label(window, text="ComputerID").pack()
+        Label(window, text = laptops[y].computerID).pack()
+        Label(window, text="Memory").pack()
+        Label(window, text= laptops[y].memory).pack()
+        Label(window, text="Storage").pack()
+        Label(window, text= laptops[y].storage).pack()
+        Label(window, text="Clock Speed").pack()
+        Label(window, text= laptops[y].clockspeed).pack()
+        Label(window, text="Weight").pack()
+        Label(window, text= laptops[y].weight).pack()
+        Label(window, text="").pack(padx = 10, pady = 10)
+        y = y+1
+
+    z = 0
+    for x in desktops:
+        Label(window, text="ComputerID").pack()
+        Label(window, text = desktops[z].computerID).pack()
+        Label(window, text="Memory").pack()
+        Label(window, text= desktops[z].memory).pack()
+        Label(window, text="Storage").pack()
+        Label(window, text= desktops[z].storage).pack()
+        Label(window, text="Clock Speed").pack()
+        Label(window, text= desktops[z].clockspeed).pack()
+        Label(window, text="Monitor").pack()
+        Label(window, text= desktops[z].monitor).pack()
+        Label(window, text="").pack(padx = 10, pady = 10)
+        z = z+ 1
+    
+def store(computerID,memory,storage,clockspeed,weight,monitor):
+    computerID.get()
+
+def addD():
+    window = Toplevel(top)
+    window.title("Add desktop sale")
+    window.geometry("200x200")
+    Label(window, text = "Add desktop sale").pack()
+    entry = Entry(window)
+    entry.pack()
+    entry.focus_set()
+    Button(window, text="Okay", command= store(computerID))
+
+
+def quit():
+    exit()   
+a = Button(top, text = "View all sales", command = showsales)
+a.pack(padx = 10, pady = 5)
+b = Button(top, text = "Add Desktop Sale", command = addD)
+b.pack(padx = 10, pady = 5)
+c = Button(top, text = "Add Laptop Sale", command = buttonTest)
+c.pack(padx = 10, pady = 5)
+d = Button(top, text = "Quit", command = quit)
+d.pack(padx = 10, pady = 5)
 top.mainloop()
 
 def dIdCheck(computerID):
@@ -54,13 +114,7 @@ def lIdCheck(computerID):
         return bool
 
 
-laptop0 = laptop("L001", 16, 512, 3.2, 0.99)
-laptop1 = obj = laptop("L002", 16, 1000, 3.2, 0.99)
-desktop0 = obj = desktop("D001", 32, 1000, 4.2, "1080p")
-desktop1 = obj = desktop("D002", 32, 2000, 4.0, "4k")
 
-laptops = [laptop0, laptop1]
-desktops = [desktop0, desktop1]
 userInput = 0
 while True:
     print("Hello! This is my IT sales system")
