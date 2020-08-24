@@ -2,7 +2,9 @@ from computer import computer
 from computer import laptop
 from computer import desktop
 from tkinter import *
+from tkinter import messagebox
 from tkinter.ttk import *
+
 
 laptop0 = laptop("L001", 16, 512, 3.2, 0.99)
 laptop1 = obj = laptop("L002", 16, 1000, 3.2, 0.99)
@@ -23,35 +25,59 @@ def showsales():
     window = Toplevel(top)
     window.title("show sales")
     window.geometry("200x200")
-    Label(window, text="show sales").pack()
+    
+    a = 0
+    b = 0
     y = 0
     for x in laptops:
-        Label(window, text="ComputerID").pack()
-        Label(window, text=laptops[y].computerID).pack()
-        Label(window, text="Memory").pack()
-        Label(window, text=laptops[y].memory).pack()
-        Label(window, text="Storage").pack()
-        Label(window, text=laptops[y].storage).pack()
-        Label(window, text="Clock Speed").pack()
-        Label(window, text=laptops[y].clockspeed).pack()
-        Label(window, text="Weight").pack()
-        Label(window, text=laptops[y].weight).pack()
-        Label(window, text="").pack(padx=10, pady=10)
+        Label(window, text="ComputerID").grid(row = a, column = b)
+        a = a + 1
+        Label(window, text=laptops[y].computerID).grid(row = a, column = b)
+        a = a + 1
+        Label(window, text="Memory").grid(row = a, column = b)
+        a = a + 1
+        Label(window, text=laptops[y].memory).grid(row = a, column = b)
+        a = a + 1
+        Label(window, text="Storage").grid(row = a, column = b)
+        a = a + 1
+        Label(window, text=laptops[y].storage).grid(row = a, column = b)
+        a = a + 1
+        Label(window, text="Clock Speed").grid(row = a, column = b)
+        a = a + 1
+        Label(window, text=laptops[y].clockspeed).grid(row = a, column = b)
+        a = a + 1
+        Label(window, text="Weight").grid(row = a, column = b)
+        a = a + 1
+        Label(window, text=laptops[y].weight).grid(row = a, column = b)
+        a = 0
+        
+        b = b + 1
         y = y+1
 
     z = 0
     for x in desktops:
-        Label(window, text="ComputerID").pack()
-        Label(window, text=desktops[z].computerID).pack()
-        Label(window, text="Memory").pack()
-        Label(window, text=desktops[z].memory).pack()
-        Label(window, text="Storage").pack()
-        Label(window, text=desktops[z].storage).pack()
-        Label(window, text="Clock Speed").pack()
-        Label(window, text=desktops[z].clockspeed).pack()
-        Label(window, text="Monitor").pack()
-        Label(window, text=desktops[z].monitor).pack()
-        Label(window, text="").pack(padx=10, pady=10)
+        Label(window, text="ComputerID").grid(row = a, column = b)
+        a = a + 1
+        Label(window, text=desktops[z].computerID).grid(row = a, column = b)
+        a = a + 1
+        Label(window, text="Memory").grid(row = a, column = b)
+        a = a + 1
+        Label(window, text=desktops[z].memory).grid(row = a, column = b)
+        a = a + 1
+        Label(window, text="Storage").grid(row = a, column = b)
+        a = a + 1
+        Label(window, text=desktops[z].storage).grid(row = a, column = b)
+        a = a + 1
+        Label(window, text="Clock Speed").grid(row = a, column = b)
+        a = a + 1
+        Label(window, text=desktops[z].clockspeed).grid(row = a, column = b)
+        a = a + 1
+        Label(window, text="Monitor").grid(row = a, column = b)
+        a = a + 1
+        Label(window, text=desktops[z].monitor).grid(row = a, column = b)
+        a = 0
+        
+        b = b + 1
         z = z + 1
 
 
@@ -64,9 +90,40 @@ def addD():
     entry1 = Entry(window)
     entry1.pack()
 
+    
+
     def storeCompID():
-        userInput = entry1.get()
-        return userInput
+        def dIdCheck(computerID):
+            bool = False
+            y = 0
+            x = 0
+            z = 0
+            if(computerID.startswith("D")) and len(computerID) == 4:
+                z = 1
+
+            for x in desktops:
+                if (computerID == desktops[y].computerID):
+                    x = 0
+                else:
+                    x = 1
+                y = y + 1
+            if(x == 1 and z == 1):
+                bool = True
+                return bool
+        
+        while True:
+            userInput = entry1.get()
+            userInput.upper()
+            bool = dIdCheck(userInput)
+            if (bool):
+                return userInput
+                break
+            else:
+                messagebox.showerror("Error", "Desktop ID must start with 'D' and have 3 digits behind it and cannot match any existing ID")
+                break
+                
+            
+
     Button(window, text="Okay", command=storeCompID).pack()
 
     Label(window, text="Memory").pack()
@@ -128,13 +185,34 @@ def addL():
     entry1.pack()
 
     def storeCompID():
-        userInput = entry1.get()
-        return userInput
-    Button(window, text="Okay", command=storeCompID).pack()
+        def lIdCheck(computerID):
+            bool = False
+            y = 0
+            x = 0
+            z = 0
+            if(computerID.startswith("L")) and len(computerID) == 4:
+                z = 1
 
-    Label(window, text="Memory").pack()
-    entry2 = Entry(window)
-    entry2.pack()
+            for x in laptops:
+                if (computerID == laptops[y].computerID):
+                    x = 0
+                else:
+                    x = 1
+                y = y + 1
+            if(x == 1 and z == 1):
+                bool = True
+                return bool
+        
+        while True:
+            userInput = entry1.get()
+            userInput.upper()
+            bool = lIdCheck(userInput)
+            if (bool):
+                return userInput
+                break
+            else:
+                messagebox.showerror("Error", "Laptop ID must start with 'L' and have 3 digits behind it and cannot match any existing ID")
+                break
 
     def storeMem():
         userInput = entry2.get()
@@ -326,3 +404,4 @@ while True:
 
     if (userInput == '4'):
         break
+
